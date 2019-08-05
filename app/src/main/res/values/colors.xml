@@ -3,4 +3,11 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+
+    <!--2 mau co ban -->
+    <color name="bg_black">#000000</color>
+    <color name="bg_white">#ffffff</color>
+
+
 </resources>
+
