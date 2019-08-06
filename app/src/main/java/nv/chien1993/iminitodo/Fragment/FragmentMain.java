@@ -1,6 +1,7 @@
 package nv.chien1993.iminitodo.Fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -9,7 +10,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import nv.chien1993.iminitodo.Activity.ActivityAddTodo;
+import nv.chien1993.iminitodo.Model.ToDoItem;
 import nv.chien1993.iminitodo.R;
+
+import static nv.chien1993.iminitodo.Fragment.ConSt.SEND_REMIND;
+import static nv.chien1993.iminitodo.Fragment.ConSt.SEND_REMIND_CODE;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -111,6 +117,8 @@ public class FragmentMain extends Fragment implements View.OnClickListener {
     }
 
     private void openEdit() {
+        Intent intent = new Intent(getActivity(), ActivityAddTodo.class);
+        startActivity(intent);
 
     }
 
@@ -127,5 +135,20 @@ public class FragmentMain extends Fragment implements View.OnClickListener {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == SEND_REMIND_CODE) {
+            ToDoItem toDoItem = (ToDoItem) data.getSerializableExtra(SEND_REMIND);
+            addDataAndUpdateListView(toDoItem);
+
+        }
+    }
+
+    private void addDataAndUpdateListView(ToDoItem toDoItem) {
+
     }
 }

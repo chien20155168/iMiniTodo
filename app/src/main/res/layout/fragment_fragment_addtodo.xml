@@ -1,12 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".Fragment.FragmentAddtodo">
+
 
     <include layout="@layout/a_toolbar" />
     <!-- TODO: Update blank fragment layout -->
 
 
-</FrameLayout>
+<TextView
+    android:id="@+id/ToDoEditText_Title"
+    android:hint="title"
+    android:textSize="30sp"
+    android:layout_width="match_parent"
+    android:layout_height="50dp" />
+
+<TextView
+    android:id="@+id/ToDoEditText_Des"
+    android:hint="Des"
+    android:textSize="30sp"
+    android:layout_width="match_parent"
+    android:layout_height="50dp" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+        <TextView
+            android:id="@+id/userToDoEditText_remind"
+            android:text="Rme"
+            android:gravity="center"
+            android:textSize="40sp"
+            android:layout_weight="2"
+            android:layout_width="0dp"
+            android:layout_height="50dp" />
+        <android.support.v7.widget.SwitchCompat
+            android:id="@+id/isReminder"
+            android:layout_gravity="center"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent" />
+        <Button
+            android:id="@+id/userToDoEditText_copy"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/newTodoDateEditText_day"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent" />
+        <TextView
+            android:id="@+id/space"
+            android:textSize="50sp"
+            android:text="\@"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/newTodoDateEditText_time"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/newTodoDateEditText_reply"
+        android:textSize="40sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp"
+        android:id="@+id/save_minder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</LinearLayout>

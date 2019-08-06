@@ -14,6 +14,8 @@ public class ActivityAddTodo extends Activitydefaut implements FragmentAddtodo.O
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
+
     }
 
     @Override
