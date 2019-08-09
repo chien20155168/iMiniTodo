@@ -23,6 +23,7 @@ import nv.chien1993.iminitodo.R;
  * create an instance of this fragment.
  */
 public class FragmentAbout extends Fragment {
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -47,6 +48,7 @@ public class FragmentAbout extends Fragment {
      * @return A new instance of fragment FragmentAbout.
      */
     // TODO: Rename and change types and number of parameters
+
     public static FragmentAbout newInstance(String param1, String param2) {
         FragmentAbout fragment = new FragmentAbout();
         Bundle args = new Bundle();
@@ -55,7 +57,6 @@ public class FragmentAbout extends Fragment {
         fragment.setArguments(args);
         return fragment;
     }
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -94,14 +95,14 @@ public class FragmentAbout extends Fragment {
             pf = getActivity().getPackageManager().getPackageInfo(getActivity().getPackageName(), 0);
             appVs = pf.versionName;
 
-        } catch (PackageManager.NameNotFoundException e) {
+        }
+
+        catch (PackageManager.NameNotFoundException e) {
 
             e.printStackTrace();
         }
 
         ((TextView)v.findViewById(R.id.about_vsApp)).setText(appVs);
-
-
 
     }
 

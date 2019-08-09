@@ -17,6 +17,8 @@ public class ActivityAbout extends Activitydefaut implements FragmentAbout.OnFra
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+
     }
 
     @Override

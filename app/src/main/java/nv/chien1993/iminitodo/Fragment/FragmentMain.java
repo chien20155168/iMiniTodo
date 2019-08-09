@@ -4,17 +4,26 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.List;
+
 import nv.chien1993.iminitodo.Activity.ActivityAddTodo;
+import nv.chien1993.iminitodo.Activity.ActivityMain;
+import nv.chien1993.iminitodo.Adapter.AdapterTodo;
 import nv.chien1993.iminitodo.Model.ToDoItem;
 import nv.chien1993.iminitodo.R;
 
-import static nv.chien1993.iminitodo.Fragment.ConSt.SEND_REMIND;
+import static nv.chien1993.iminitodo.Fragment.ConSt.DATA_TODOITEM;
 import static nv.chien1993.iminitodo.Fragment.ConSt.SEND_REMIND_CODE;
 
 /**
@@ -25,6 +34,7 @@ import static nv.chien1993.iminitodo.Fragment.ConSt.SEND_REMIND_CODE;
  * Use the {@link FragmentMain#newInstance} factory method to
  * create an instance of this fragment.
  */
+
 public class FragmentMain extends Fragment implements View.OnClickListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -35,7 +45,11 @@ public class FragmentMain extends Fragment implements View.OnClickListener {
     private String mParam1;
     private String mParam2;
 
+    private RecyclerView toDoRcv;
+
     private OnFragmentInteractionListener mListener;
+    private List<ToDoItem> listapp;
+    private AdapterTodo toDoAdapter;
 
     public FragmentMain() {
         // Required empty public constructor
@@ -60,12 +74,42 @@ public class FragmentMain extends Fragment implements View.OnClickListener {
     }
 
     @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        //0
+        toDoRcv = view.findViewById(R.id.todoRcview);
+
+        //1
+        listapp = ((ActivityMain)getActivity()).getToDoItems();
+        toDoAdapter = new AdapterTodo(getActivity(), new AdapterTodo.ClickItemRcv() {
+            @Override
+            public void onClickItemRcv(int posItem) {
+                //
+
+            }
+        }, listapp);
+        toDoRcv.setAdapter(toDoAdapter);
+
+        //2
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), RecyclerView.VERTICAL, false);
+        toDoRcv.setLayoutManager(linearLayoutManager);
+
+        //3
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL);
+        toDoRcv.addItemDecoration(dividerItemDecoration);
+
+    }
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
     }
 
     @Override
@@ -118,7 +162,7 @@ public class FragmentMain extends Fragment implements View.OnClickListener {
 
     private void openEdit() {
         Intent intent = new Intent(getActivity(), ActivityAddTodo.class);
-        startActivity(intent);
+        startActivityForResult(intent,SEND_REMIND_CODE);
 
     }
 
@@ -138,13 +182,20 @@ public class FragmentMain extends Fragment implements View.OnClickListener {
     }
 
 
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
         if (requestCode == SEND_REMIND_CODE) {
-            ToDoItem toDoItem = (ToDoItem) data.getSerializableExtra(SEND_REMIND);
+
+            ToDoItem toDoItem = (ToDoItem) data.getSerializableExtra(DATA_TODOITEM);
             addDataAndUpdateListView(toDoItem);
 
+            //co thong tin
+            List<ToDoItem> toDoItems = ((ActivityMain)getActivity()).getToDoItems();
+            toDoItems.add(toDoItem);
+            toDoAdapter.notifyDataSetChanged();
         }
     }
 

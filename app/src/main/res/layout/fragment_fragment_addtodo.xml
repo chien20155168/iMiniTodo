@@ -11,14 +11,14 @@
     <!-- TODO: Update blank fragment layout -->
 
 
-<TextView
+<EditText
     android:id="@+id/ToDoEditText_Title"
     android:hint="title"
     android:textSize="30sp"
     android:layout_width="match_parent"
     android:layout_height="50dp" />
 
-<TextView
+<EditText
     android:id="@+id/ToDoEditText_Des"
     android:hint="Des"
     android:textSize="30sp"
